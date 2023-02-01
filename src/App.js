@@ -1,24 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import "./services/firebase";
+import 'react-tabs/style/react-tabs.css';
+import {useState} from "react";
+import {PersonSelectorPage} from "./pages/PersonSelectorPage";
+import {Section} from "./components/Section";
+import {Col, Row} from "react-bootstrap";
+import {WorkersPage} from "./pages/Workerspage";
+
 
 function App() {
+        const [p, setp] = useState(null);
+
+    if(p == null){
+        return(
+            <Section>
+                <PersonSelectorPage p={p} setp={setp}/>
+            </Section>
+
+        );
+
+
+    }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+
+        <h1>{p.name}</h1>
+        <div>{p.status}</div>
+        <a href="#" onDoubleClick={() => setp(null)}>Logout</a>
+
+          <Row>
+              <WorkersPage p={p} setp={setp}/>
+          </Row>
+      </>
   );
 }
 
