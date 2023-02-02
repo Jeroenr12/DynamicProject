@@ -12,14 +12,6 @@ export const firestoreDB = getFirestore(firebaseApp);
 
 console.log("initialized firebase connection");
 
-export const dataConverter = {
-    toFirestore: undefined,
-    fromFirestore: function (snapshot, options){
-        const data = snapshot.data(options);
-        return{...data, id: snapshot.id, ref: snapshot.ref}
-    }
-};
-
 export const personConverter = {
     toFirestore: function (dataInApp){
         return{

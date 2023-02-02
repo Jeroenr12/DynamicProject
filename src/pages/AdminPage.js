@@ -1,4 +1,7 @@
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
+import {CreatePersonPage} from "./CreatePersonPage";
+import {ViewProfilesPage} from "./ViewProfilesPage";
+import {ProfilePage} from "./ProfilePage";
 
 export function AdminPage(props){
     const {p, setp} = props;
@@ -11,14 +14,14 @@ export function AdminPage(props){
                     <Tab>View profiles</Tab>
                 </TabList>
                 <TabPanel>
+                    <ProfilePage p={p} setp={setp}/>
 
                 </TabPanel>
                 <TabPanel>
-                    <CreateProfilePage/>
-
+                    <CreatePersonPage/>
                 </TabPanel>
                 <TabPanel>
-
+                    <ViewProfilesPage/>
                 </TabPanel>
 
 

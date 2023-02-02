@@ -1,5 +1,5 @@
 import {collection, query, where} from "firebase/firestore";
-import {dataConverter, firestoreDB} from "../services/firebase";
+import {personConverter, firestoreDB} from "../services/firebase";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import {Persons} from "../components/Persons";
 import {Container, Row} from "react-bootstrap";
@@ -13,7 +13,7 @@ export function PersonSelectorPage(props){
 
     return(
         <Container>
-            <h2>dubbelklik op jou profiel</h2>
+            <h2>klik op jou profiel</h2>
             <Row className="mx-3">
                 <h3>admin</h3>
                 <Persons persons={admins} p={p} setp={setp}/>
@@ -32,7 +32,7 @@ export function PersonSelectorPage(props){
 }
 
 function RolesFromDb(role){
-    const collectionRef = collection(firestoreDB, 'person').withConverter(dataConverter);
+    const collectionRef = collection(firestoreDB, 'person').withConverter(personConverter);
     const queryRef = query(collectionRef, where("role","==",role));
     const [values, loading, error] = useCollectionData(queryRef);
     return values;
