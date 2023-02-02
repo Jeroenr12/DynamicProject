@@ -1,5 +1,7 @@
 import {Section} from "../components/Section";
 import {AdminPage} from "./AdminPage";
+import {DriverPage} from "./DriverPage";
+import {DispatchPage} from "./DispatchPage";
 
 export function WorkersPage(props){
     const {p, setp} = props;
@@ -13,14 +15,18 @@ export function WorkersPage(props){
 
     if (p.role === "DISPATCH"){
         return(
-            <div>hello master</div>
+            <section>
+                <DispatchPage p={p} setp={setp}/>
+            </section>
 
         );
     }
 
     if (p.role === "DRIVER"){
         return(
-            <div>hello master</div>
+            <section>
+                <DriverPage p={p} setp={setp}/>
+            </section>
         );
     }
     return(

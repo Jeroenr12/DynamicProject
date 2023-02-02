@@ -24,3 +24,21 @@ export const personConverter = {
         return{...data, id: snapshot.id, ref: snapshot.ref}
     }
 };
+
+export const driveConverter = {
+    toFirestore: function (dataInApp){
+        return{
+           driverid: dataInApp.driverid,
+           dropoff:  dataInApp.dropoff,
+            pickup: dataInApp.pickup,
+            pickedup:   dataInApp.pickedup,
+            droppedoff: dataInApp.droppedoff,
+            active: dataInApp.active,
+
+        }
+    },
+    fromFirestore: function (snapshot, options){
+        const data = snapshot.data(options);
+        return{...data, id: snapshot.id, ref: snapshot.ref}
+    }
+};
