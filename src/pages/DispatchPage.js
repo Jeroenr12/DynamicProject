@@ -15,8 +15,6 @@ export function DispatchPage(props){
                     <Tab>My profile</Tab>
                     <Tab>Create drive</Tab>
                     <Tab>Assign drive</Tab>
-                    <Tab>see active drives</Tab>
-                    <Tab>see all drives</Tab>
                     <Tab>monitor drivers</Tab>
                 </TabList>
                 <TabPanel>
@@ -27,12 +25,6 @@ export function DispatchPage(props){
                 </TabPanel>
                 <TabPanel>
                     <AssignDriverPage d={d} setd={setd}/>
-
-                </TabPanel>
-                <TabPanel>
-
-                </TabPanel>
-                <TabPanel>
 
                 </TabPanel>
                 <TabPanel>

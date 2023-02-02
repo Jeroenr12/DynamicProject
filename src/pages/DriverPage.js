@@ -3,6 +3,7 @@ import {ProfilePage} from "./ProfilePage";
 import {CreatePersonPage} from "./CreatePersonPage";
 import {ViewProfilesPage} from "./ViewProfilesPage";
 import {useState} from "react";
+import {DrivesPage} from "./DrivesPage";
 
 export function DriverPage(props){
     const {p, setp} = props;
@@ -20,6 +21,7 @@ export function DriverPage(props){
 
                 </TabPanel>
                 <TabPanel>
+                    <DrivesPage p={p} d={d} setd={setd}/>
                 </TabPanel>
                 <TabPanel>
                 </TabPanel>
