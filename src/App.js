@@ -23,7 +23,6 @@ function App() {
     }
   return (
       <>
-
         <h1>{p.name}</h1>
         <div>{p.status}</div>
         <a href="#" onDoubleClick={() => setp(null)}>Logout</a>
