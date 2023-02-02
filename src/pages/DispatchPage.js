@@ -1,8 +1,9 @@
-import {ViewProfilesPage} from "./ViewProfilesPage";
 import {ProfilePage} from "./ProfilePage";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 import {useState} from "react";
 import {CreateDrivePage} from "./CreateDrivePage";
+import {AssignDriverPage} from "./AssignDriverPage";
+import {DriversMonitor} from "../components/Persons";
 
 export function DispatchPage(props){
     const {p, setp} = props;
@@ -35,6 +36,7 @@ export function DispatchPage(props){
 
                 </TabPanel>
                 <TabPanel>
+                    <DriversMonitor/>
 
                 </TabPanel>
 

@@ -4,10 +4,11 @@ import {Button, Form} from "react-bootstrap";
 import {driveConverter, firestoreDB} from "../services/firebase";
 
 export function CreateDrivePage(props){
+
     const {d, setd} = props;
 
-    const collectionRef = collection(firestoreDB, 'person').withConverter(driveConverter);
-    const [driveToAdd, setdriveToAdd] = useState({driverid: null, pickup: null, dropoff: null, pickedup: false, droppedoff: false, active: false});
+    const collectionRef = collection(firestoreDB, 'drive').withConverter(driveConverter);
+    const [driveToAdd, setdriveToAdd] = useState({ref: null, driverid: null, pickup: null, dropoff: null, pickedup: false, droppedoff: false, active: false});
 
     const AddDrive = async (e) => {
         e.preventDefault();
@@ -21,8 +22,10 @@ export function CreateDrivePage(props){
                 droppedoff: driveToAdd.droppedoff,
                 active: driveToAdd.active,
             });
-            setd(driveToAdd);
-            console.log("Document written with ID: ", docRef.id);
+            console.log(docRef.id);
+            setd(docRef);
+
+
         } catch (e) {
             console.error("Error adding document: ", e);
         }
