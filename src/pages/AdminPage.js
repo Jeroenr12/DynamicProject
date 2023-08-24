@@ -1,31 +1,31 @@
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
-import {CreatePersonPage} from "./CreatePersonPage";
 import {ViewProfilesPage} from "./ViewProfilesPage";
-import {ProfilePage} from "./ProfilePage";
+import {CreateDrivePage} from "./CreateDrivePage";
+import {DispatchDrivesMonitorPage} from "./DispatchDrivesMonitorPage";
 
 export function AdminPage(props){
     const {p, setp} = props;
     return(
-      <>
+      <section >
             <Tabs>
                 <TabList>
-                    <Tab>My profile</Tab>
-                    <Tab>Create profile</Tab>
                     <Tab>View profiles</Tab>
+                    <Tab>Create drive</Tab>
                 </TabList>
                 <TabPanel>
-                    <ProfilePage p={p} setp={setp}/>
-
+                    <ViewProfilesPage p={p}/>
                 </TabPanel>
                 <TabPanel>
-                    <CreatePersonPage/>
+                    <div className="row">
+                        <div className="col-lg-8 h-100">
+                            <CreateDrivePage/>
+                        </div>
+                        <div className="col-lg-4 h-100">
+                            <DispatchDrivesMonitorPage/>
+                        </div>
+                    </div>
                 </TabPanel>
-                <TabPanel>
-                    <ViewProfilesPage/>
-                </TabPanel>
-
-
             </Tabs>
-      </>
+      </section>
     );
 }

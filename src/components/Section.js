@@ -15,7 +15,7 @@ function SectionContent(props) {
 export function Section(props) {
     const {children} = props;
     return (
-        <div className="my-3 p-1 rounded shadow-sm" style={{backgroundColor: "lavender"}}>
+        <div >
             <SectionContent>{children}</SectionContent>
         </div>
     );

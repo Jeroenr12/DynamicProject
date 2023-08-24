@@ -1,18 +1,29 @@
 import {Section} from "./Section";
-import {Button, Col, Form} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import {MyCard} from "./MyCard";
 import {MdDelete} from "react-icons/md";
-import PropTypes, {func} from "prop-types";
-import {collection, query, updateDoc, where} from "firebase/firestore";
-import {firestoreDB, personConverter} from "../services/firebase";
-import {useCollectionData} from "react-firebase-hooks/firestore";
+import PropTypes from "prop-types";
+import {usePersonsContext} from "../contexts/PersonsContext";
 
 function Person(props){
-    const {person, p, setp} = props;
+    const {onEditPerson} = usePersonsContext();
+    const {person, setp} = props;
+    if(person.role === "DRIVER"){
+        return(
+            <a className="text-dark text-decoration-none w-50 bg-transparent" onClick={() =>{onEditPerson(person, {status: "ACTIVE"});
+                setp(person);}}>
+                <MyCard className="shadow border-1 border-dark">
+                    <div className="fw-bold fs-4">>{person.name}</div>
+                    <div>{person.id}</div>
+                </MyCard>
+            </a>
+
+        );
+    }
     return(
-        <a href="#" onClick={() => setp(person)}>
-            <MyCard classname="border-1 border-dark">
-                <div>{person.name}</div>
+        <a className="text-dark text-decoration-none w-50 bg-transparent" onClick={() => setp(person)}>
+            <MyCard className="shadow border-1 border-dark">
+                <div className="fw-bold fs-4">{person.name}</div>
                 <div>{person.id}</div>
             </MyCard>
         </a>
@@ -21,16 +32,14 @@ function Person(props){
 }
 
 export function Persons(props){
-    const {persons, p, setp} = props;
+    const {persons, setp} = props;
+    console.log(persons);
     return(
-      <Section>
+      <Section className="">
           {persons?.map(p =>
-              <Col md={3}>
                   <Person key={p.id}
                           person={p}
-                          p={p} setp={setp}/>
-              </Col>
-          )}
+                          p={p} setp={setp}/>)}
       </Section>
     );
 }
@@ -46,14 +55,30 @@ function EditOptionsButton(props) {
 }
 
 function Worker(props){
-        const {person, onDeletePerson} = props;
+        const {onDeletePerson} = usePersonsContext()
+        const {person, p} = props;
+        if(p.ref.id === person.ref.id){
+            return (
+                <Col xs={12} sm={8} md={6} lg={4} >
+                    <MyCard>
+                        <div className="bg-light">
+                            <div className="fw-bold fs-4">{person.name}</div>
+                            <div>ID: {person.id}</div>
+                            <div>{person.role}</div>
+                        </div>
+                    </MyCard>
+                </Col>
+            );
+        }
         return (
-            <Col xs={6} sm={4} md={3} lg={2}>
+            <Col xs={12} sm={8} md={6} lg={4}>
                 <MyCard>
-                    <div>{person.name}</div>
-                    <div>{person.id}</div>
-                    <div>{person.role}</div>
-                    <div>{person.status}</div>
+                    <div className="bg-light">
+                        <div className="fw-bold fs-4">{person.name}</div>
+                        <div>ID: {person.id}</div>
+                        <div>{person.role}</div>
+                        <div>{person.status}</div>
+                    </div>
                     {(onDeletePerson) &&
                     <div className="border-top mt-1 pt-1">
                         <EditOptionsButton onClick={() => onDeletePerson(person)}><MdDelete/></EditOptionsButton>
@@ -69,86 +94,37 @@ Worker.propTypes = {
         name: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
         role: PropTypes.string.isRequired,
-        status: PropTypes.string.isRequired,
+        status: PropTypes.string,
     })
 }
 
 export function Workers(props){
-    const {persons, onDeletePerson} = props;
+    const {persons, p} = props;
     return (
         <Section>
-            {persons?.map(p =>
-                <Worker key={p.id}
-                        person={p}
-                        onDeletePerson={onDeletePerson}
+            {persons?.map(per =>
+                <Worker key={per.id}
+                        person={per} p={p}
                 />)}
         </Section>
     );
 }
 
-async function AssignDrive(person, d, setd){
-    try{
-        await updateDoc(d, {driverid: person.ref});
-        setd(null);
-    } catch (e) {
-        console.log(`ERROR Status edit NOT done correctly: ${e}`)
-    }
-    return true;
-}
-
-function ActiveDriver(props){
-    const {person, d, setd} = props;
-    return(
-        <a href="#" onClick={() => AssignDrive(person, d, setd)}>
-            <MyCard classname="border-1 border-dark">
-                <div>{person.name}</div>
-                <div>{person.id}</div>
-            </MyCard>
-        </a>
-
-    );
-}
-
-export function ActiveDrivers(props){
-    const {d, setd, persons} = props;
-    return(
-        <Section>
-        {persons?.map(p =>
-            <Col md={3}>
-                <ActiveDriver key={p.id}
-                        person={p}
-                        d={d} setd={setd}/>
-            </Col>
-        )}
-        </Section>
-    );
-}
-
-function DriverMonitor(props){
+export function DriverMonitor(props){
     const {person} = props;
     return(
-        <MyCard classname="border-1 border-dark m-3">
-            <div>{person.name}</div>
-            <div>{person.id}</div>
-            <div>{person.status}</div>
-        </MyCard>
+        <Col xs={6} sm={6} md={4} lg={4}>
+            {/*<a href="#" onClick={}>*/}
+            <MyCard classname="border-1 border-dark m-3">
+                <div>{person.name}</div>
+                <div>{person.id}</div>
+                <div>{person.status}</div>
+            </MyCard>
+            {/*</a>*/}
+        </Col>
+
     );
 }
 
-export function DriversMonitor(){
-    const collectionRef = collection(firestoreDB, 'person').withConverter(personConverter);
-    const queryRef = query(collectionRef, where("role","==","DRIVER"));
-    const [values, loading, error] = useCollectionData(queryRef);
-    return(
-        <Section>
-            {values?.map(p =>
-                <Col md={3}>
-                    <DriverMonitor key={p.id}
-                            person={p}/>
-                </Col>
-            )}
-        </Section>
-    );
-}
 
 

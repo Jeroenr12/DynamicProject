@@ -1,39 +1,36 @@
-import {ProfilePage} from "./ProfilePage";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 import {useState} from "react";
 import {CreateDrivePage} from "./CreateDrivePage";
-import {AssignDriverPage} from "./AssignDriverPage";
-import {DriversMonitor} from "../components/Persons";
+import {DispatchDrivesMonitorPage} from "./DispatchDrivesMonitorPage";
+import {DriversMonitorPage} from "./DriversMonitorPage";
 
 export function DispatchPage(props){
-    const {p, setp} = props;
     const [d, setd] = useState(null);
     return(
-        <>
-            <Tabs>
-                <TabList>
-                    <Tab>My profile</Tab>
-                    <Tab>Create drive</Tab>
-                    <Tab>Assign drive</Tab>
-                    <Tab>monitor drivers</Tab>
-                </TabList>
-                <TabPanel>
-                    <ProfilePage p={p} setp={setp}/>
-                </TabPanel>
-                <TabPanel>
-                    <CreateDrivePage d={d} setd={setd}/>
-                </TabPanel>
-                <TabPanel>
-                    <AssignDriverPage d={d} setd={setd}/>
+        <section>
+            <div className="row">
+            <div className="col-lg-8 h-100">
+                <Tabs>
 
-                </TabPanel>
-                <TabPanel>
-                    <DriversMonitor/>
+                    <TabList>
+                        <Tab>monitor drivers</Tab>
+                        <Tab>Create drive</Tab>
 
-                </TabPanel>
+                    </TabList>
+                    <TabPanel>
+                        <DriversMonitorPage/>
+                    </TabPanel>
+                    <TabPanel>
+                        <CreateDrivePage/>
+                    </TabPanel>
 
+                </Tabs>
+            </div>
+            <div className="col-lg-4 h-100">
+                <DispatchDrivesMonitorPage/>
+            </div>
+            </div>
 
-            </Tabs>
-        </>
+        </section>
     );
 }

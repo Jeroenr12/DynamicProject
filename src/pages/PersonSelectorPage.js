@@ -1,9 +1,6 @@
-import {collection, query, where} from "firebase/firestore";
-import {personConverter, firestoreDB} from "../services/firebase";
-import {useCollectionData} from "react-firebase-hooks/firestore";
 import {Persons} from "../components/Persons";
-import {Container, Row} from "react-bootstrap";
-import {useEffect} from "react";
+import {Col, Container, Row} from "react-bootstrap";
+import {usePersonsContext} from "../contexts/PersonsContext";
 
 export function PersonSelectorPage(props){
     const {p, setp} = props;
@@ -12,28 +9,29 @@ export function PersonSelectorPage(props){
     const admins = RolesFromDb("ADMIN");
 
     return(
-        <Container>
-            <h2>klik op jou profiel</h2>
-            <Row className="mx-3">
-                <h3>admin</h3>
-                <Persons persons={admins} p={p} setp={setp}/>
-            </Row>
-            <Row className="mx-3">
-                <h3>dispatch</h3>
-                <Persons persons={dispatchers} p={p} setp={setp}/>
-            </Row>
-            <Row className="mx-3">
-                <h3>driver</h3>
-                <Persons persons={drivers} p={p} setp={setp}/>
-            </Row>
-
-        </Container>
+        <div className="Container m-3 p-4 bg-secondary bg-opacity-50 rounded-5" >
+            <Col className="">
+                <Row>
+                    <h1 className="text-center d-inline m-3">klik op jou profiel</h1>
+                </Row>
+                <Row className="mx-3 ">
+                    <h2 className="text-center d-inline m-3">admin</h2>
+                    <Persons persons={admins} p={p} setp={setp}/>
+                </Row>
+                <Row className="mx-3">
+                    <h2 className="text-center d-inline m-3">dispatch</h2>
+                    <Persons persons={dispatchers} p={p} setp={setp}/>
+                </Row>
+                <Row className="mx-3">
+                    <h2 className="text-center d-inline m-3">driver</h2>
+                    <Persons persons={drivers} p={p} setp={setp}/>
+                </Row>
+            </Col>
+        </div>
     )
 }
 
 function RolesFromDb(role){
-    const collectionRef = collection(firestoreDB, 'person').withConverter(personConverter);
-    const queryRef = query(collectionRef, where("role","==",role));
-    const [values, loading, error] = useCollectionData(queryRef);
-    return values;
+    const {persons} = usePersonsContext();
+    return persons?.filter(per => per.role === role);
 }

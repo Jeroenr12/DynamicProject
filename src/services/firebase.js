@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import {getFirestore} from 'firebase/firestore';
-import data from "bootstrap/js/src/dom/data";
 
 const firebaseConfig = {
     projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
@@ -16,6 +15,7 @@ export const personConverter = {
     toFirestore: function (dataInApp){
         return{
             name: dataInApp.name,
+            role: dataInApp.role,
             status: dataInApp.status,
         }
     },
@@ -34,7 +34,7 @@ export const driveConverter = {
             pickedup:   dataInApp.pickedup,
             droppedoff: dataInApp.droppedoff,
             active: dataInApp.active,
-
+            cmr: dataInApp.cmr
         }
     },
     fromFirestore: function (snapshot, options){

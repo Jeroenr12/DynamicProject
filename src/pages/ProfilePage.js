@@ -1,17 +1,8 @@
-import {DriverMenu, OfficeMenu} from "../components/ProfileMenus";
+import {DriverMenu} from "../components/ProfileMenus";
 
 export function ProfilePage(props){
-    const {p, setp} = props;
-    if(p.role === "DRIVER"){
+    const {p, setp, d, setd} = props;
         return(
-            <DriverMenu p={p} setp={setp}/>
+            <DriverMenu p={p} setp={setp} d={d} setd={setd}/>
         );
-    }
-    else{
-        return(
-            <OfficeMenu p={p} setp={setp}/>
-        )
-        ;
-    }
-
 }

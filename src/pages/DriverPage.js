@@ -1,13 +1,10 @@
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 import {ProfilePage} from "./ProfilePage";
-import {CreatePersonPage} from "./CreatePersonPage";
-import {ViewProfilesPage} from "./ViewProfilesPage";
-import {useState} from "react";
 import {DrivesPage} from "./DrivesPage";
+import {CurrentDrivePage} from "./CurrentDrivePage";
 
 export function DriverPage(props){
-    const {p, setp} = props;
-    const [d, setd] = useState(null);
+    const {p, setp, d, setd} = props;
     return(
         <>
             <Tabs>
@@ -17,13 +14,14 @@ export function DriverPage(props){
                     <Tab>current drive</Tab>
                 </TabList>
                 <TabPanel>
-                    <ProfilePage p={p} setp={setp}/>
+                    <ProfilePage p={p} setp={setp} d={d} setd={setd}/>
 
                 </TabPanel>
                 <TabPanel>
                     <DrivesPage p={p} d={d} setd={setd}/>
                 </TabPanel>
                 <TabPanel>
+                    <CurrentDrivePage p={p} d={d} setd={setd}/>
                 </TabPanel>
 
 
