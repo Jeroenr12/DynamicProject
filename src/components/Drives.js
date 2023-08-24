@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import {Section} from "./Section";
 import {MyCard} from "./MyCard";
-import {Button} from "react-bootstrap";
+import {Button, Col, Row} from "react-bootstrap";
 import {ActivateDrive} from "../utilities/DataUtils";
 import {useDrivesContext} from "../contexts/DrivesContext";
 
@@ -37,10 +37,16 @@ function Drive(props){
     }
 
     return(
-        <MyCard classname="border-1 border-dark m-3">
+        <MyCard classname="border-1 border-dark m-3 w-auto">
             <h3>{drive.id}</h3>
-            <div>{drive.pickup}</div>
-            <div>{drive.dropoff}</div>
+            <Row className="flex-inline-d justify-content-center w-auto">
+                <Col>
+                    <div>Pickup adress: {drive.pickup}</div>
+                </Col>
+                <Col>
+                    <div>dropoff adress: {drive.dropoff}</div>
+                </Col>
+            </Row>
             <div>{status}</div>
             <DriveButton drive={drive} d={d} setd={setd}/>
         </MyCard>
@@ -71,7 +77,7 @@ export function Drives(props){
         );
     }
     return (
-        <Section>
+        <Section className="d-flex justify-content-center">
             {drives?.map(drive => <Drive key={drive.id} drive={drive} d={d} setd={setd}/>)}
         </Section>
     );

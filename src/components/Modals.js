@@ -29,14 +29,14 @@ export function LoadingModal(props){
     if(d == null || d.pickedup){
         return(
             <>
-                <Button disabled>LOAD</Button>
+                <Button className="fs-3 fw-bold w-100" disabled>LOAD</Button>
             </>
         );
     }
 
     return(
         <>
-            <Button onClick={() => {onEditPerson(p, {status: "LOADING"}); LoadClick(p, setp, setShow);}}>LOAD</Button>
+            <Button className="fs-3 fw-bold w-100" onClick={() => {onEditPerson(p, {status: "LOADING"}); LoadClick(p, setp, setShow);}}>LOAD</Button>
             <Modal  backdrop="static" fullscreen='true' show={show} onHide={() => LoadClose(p, setp, d, setd, setShow, cmr)}>
                 <Modal.Header>
                     <ModalTitle>Loading...</ModalTitle>
@@ -87,14 +87,14 @@ export function UnloadingModal(props){
     if(d == null || !d.pickedup){
         return(
             <>
-                <Button disabled>UNLOAD</Button>
+                <Button className="fs-3 fw-bold w-100" disabled>UNLOAD</Button>
             </>
         );
     }
 
     return(
         <>
-            <Button onClick={() => {onEditPerson(p, {status: "UNLOADING"}); UnloadClick(p, setp, setShow);} }>UNLOAD</Button>
+            <Button className="fs-3 fw-bold w-100" onClick={() => {onEditPerson(p, {status: "UNLOADING"}); UnloadClick(p, setp, setShow);} }>UNLOAD</Button>
             <Modal  backdrop="static" fullscreen='true' show={show} onHide={() => UnloadClose(p, setp, d, setd, setShow)}>
                 <Modal.Header>
                     <ModalTitle>Unloading...</ModalTitle>
@@ -123,8 +123,8 @@ export function CreatePersonModal(){
     return(
         <>
             <Button className="" onClick={() => setShow(true)}>Create employee</Button>
-            <Modal backdrop="static" fullscreen='true' show={show}>
-                <Modal.Header><ModalTitle>Create new employee</ModalTitle></Modal.Header>
+            <Modal backdrop="static" fullscreen='true' show={show} onHide={() => setShow(false)}>
+                <Modal.Header closeButton><ModalTitle>Create new employee</ModalTitle></Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Label className="mt-2 ms-1">name:</Form.Label>

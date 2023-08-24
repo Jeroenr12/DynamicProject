@@ -4,6 +4,8 @@ import {MyCard} from "./MyCard";
 
 function Drive(props){
     const {drive, person, search} = props;
+    console.log(drive);
+    console.log(person[0]);
     if(!person[0].name.toLowerCase().includes(search.toLowerCase())){
         return( <></>);
     }
@@ -19,7 +21,7 @@ function Drive(props){
     }
 
     return(
-        <MyCard classname="border-1 border-dark m-3">
+        <MyCard classname="w-auto border-1 border-dark m-3">
             <h3>{drive.id}</h3>
             <div>Pickup: {drive.pickup}</div>
             <div>dropoff: {drive.dropoff}</div>
@@ -52,7 +54,7 @@ export function DispatchDrives(props){
         );
     }
     return (
-        <Section>
+        <Section className="d-flex justify-content-center">
             {drives?.map(drive => <Drive key={drive.id} drive={drive} person={persons?.filter(per => per.ref.id === drive.driverid)} search={search}/>)}
         </Section>
     );

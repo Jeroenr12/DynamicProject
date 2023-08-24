@@ -13,7 +13,7 @@ function Person(props){
             <a className="text-dark text-decoration-none w-50 bg-transparent" onClick={() =>{onEditPerson(person, {status: "ACTIVE"});
                 setp(person);}}>
                 <MyCard className="shadow border-1 border-dark">
-                    <div className="fw-bold fs-4">>{person.name}</div>
+                    <div className="fw-bold fs-4">{person.name}</div>
                     <div>{person.id}</div>
                 </MyCard>
             </a>

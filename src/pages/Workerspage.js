@@ -1,7 +1,7 @@
 import {AdminPage} from "./AdminPage";
 import {DriverPage} from "./DriverPage";
 import {DispatchPage} from "./DispatchPage";
-import {StatusBlock} from "../components/StatusBlock";
+import {DriverStatusBlock, StatusBlock} from "../components/StatusBlock";
 import {useDrivesContext} from "../contexts/DrivesContext";
 import {usePersonsContext} from "../contexts/PersonsContext";
 
@@ -36,7 +36,7 @@ export function WorkersPage(props){
     if (p.role === "DRIVER"){
         return(
             <section>
-                <StatusBlock p={p} setp={setp} d={d}/>
+                <DriverStatusBlock p={p} setp={setp} d={d}/>
                 <DriverPage p={p} setp={setp} d={d} setd={setd}/>
             </section>
         );

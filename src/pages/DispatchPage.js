@@ -3,6 +3,7 @@ import {useState} from "react";
 import {CreateDrivePage} from "./CreateDrivePage";
 import {DispatchDrivesMonitorPage} from "./DispatchDrivesMonitorPage";
 import {DriversMonitorPage} from "./DriversMonitorPage";
+import {AllDrivesPage} from "./AllDrivesPage";
 
 export function DispatchPage(props){
     const [d, setd] = useState(null);
@@ -15,6 +16,7 @@ export function DispatchPage(props){
                     <TabList>
                         <Tab>monitor drivers</Tab>
                         <Tab>Create drive</Tab>
+                        <Tab>Drives</Tab>
 
                     </TabList>
                     <TabPanel>
@@ -22,6 +24,9 @@ export function DispatchPage(props){
                     </TabPanel>
                     <TabPanel>
                         <CreateDrivePage/>
+                    </TabPanel>
+                    <TabPanel>
+                        <AllDrivesPage/>
                     </TabPanel>
 
                 </Tabs>

@@ -8,7 +8,7 @@ export function DriverPage(props){
     return(
         <>
             <Tabs>
-                <TabList>
+                <TabList className="bg-secondary bg-opacity-25  fs-5 fw-bold p-0 ">
                     <Tab>My profile</Tab>
                     <Tab>My drives</Tab>
                     <Tab>current drive</Tab>

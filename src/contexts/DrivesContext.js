@@ -18,12 +18,18 @@ export function DrivesProvider(props){
     const [drives, loading, error] = useCollectionData(queryRef);
 
     const onNewDrive = useCallback(async (drive) => {
+        if(drive.driverid === null){
+            setMessage("You didn't enter a driver");
+            return false
+        }
         try {
             await addDoc(collectionRef, drive);
             setMessage("drive added to database");
+            return true;
         }catch {
             setMessage("something went wrong with adding drive to database");
         }
+        return false;
     }, [collectionRef, setMessage]
     );
 
