@@ -1,7 +1,7 @@
 {
   "name": "dynamicproject",
   "version": "0.1.0",
-  "homepage": "https://Jeroenr12.github.io/DynamicProject",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
